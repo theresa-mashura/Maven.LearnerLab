@@ -4,22 +4,22 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class People implements Iterable<Person> {
+public abstract class People<PersonType extends Person> implements Iterable<PersonType> {
 
-    private List<Person> personList;
+    public List<PersonType> personList;
 
     public People() {
-        this.personList = new ArrayList<Person>();
+        this.personList = new ArrayList<PersonType>();
     }
 
-    public void add(Person person) {
+    public void add(PersonType person) {
         this.personList.add(person);
     }
 
-    public Person findById(long id) {
-        Iterator<Person> itr = iterator();
+    public PersonType findById(long id) {
+        Iterator<PersonType> itr = iterator();
         while(itr.hasNext()) {
-            Person p = itr.next();
+            PersonType p = itr.next();
             if (p.getId() == id) {
                 return p;
             }
@@ -27,16 +27,16 @@ public class People implements Iterable<Person> {
         return null;
     }
 
-    public boolean contains(Person person) {
+    public boolean contains(PersonType person) {
         return this.personList.contains(person);
     }
 
-    public void remove(Person person) {
+    public void remove(PersonType person) {
         this.personList.remove(person);
     }
 
     public void remove(long id) {
-        Person personToRemove = findById(id);
+        PersonType personToRemove = findById(id);
         remove(personToRemove);
     }
 
@@ -48,14 +48,9 @@ public class People implements Iterable<Person> {
         return personList.size();
     }
 
-    // Not sure how to do this....
-    public Person[] toArray() {
-        Person[] personArray = new Person[personList.size()];
-        return personList.toArray(personArray);
-        //return null;
-    }
+    public abstract PersonType[] toArray();
 
-    public Iterator<Person> iterator(){
+    public Iterator<PersonType> iterator(){
         return personList.iterator();
     }
 

@@ -18,4 +18,8 @@ public class Student extends Person implements Learner {
 
         return this.totalStudyTime;
     }
+
+    public void clearTotalStudyTime() {
+        this.totalStudyTime = 0;
+    }
 }
