@@ -1,35 +1,42 @@
 package io.zipcoder.interfaces;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class People<PersonType> implements Iterable<PersonType> {
+public class People implements Iterable<Person> {
 
-    private List<PersonType> personList;
+    private List<Person> personList;
 
-    public void add(PersonType person) {
+    public People() {
+        this.personList = new ArrayList<Person>();
+    }
+
+    public void add(Person person) {
         this.personList.add(person);
     }
 
-    public PersonType findById(long id) {
-        for (int i = 0; i < personList.size(); i++) {
-            if (personList.get(i).getId() == id) {
-                return personList.get(i);
+    public Person findById(long id) {
+        Iterator<Person> itr = iterator();
+        while(itr.hasNext()) {
+            Person p = itr.next();
+            if (p.getId() == id) {
+                return p;
             }
         }
         return null;
     }
 
-    public boolean contains(PersonType person) {
-        return personList.contains(person);
+    public boolean contains(Person person) {
+        return this.personList.contains(person);
     }
 
-    public void remove(PersonType person) {
-        personList.remove(person);
+    public void remove(Person person) {
+        this.personList.remove(person);
     }
 
     public void remove(long id) {
-        PersonType personToRemove = findById(id);
+        Person personToRemove = findById(id);
         remove(personToRemove);
     }
 
@@ -42,13 +49,13 @@ public class People<PersonType> implements Iterable<PersonType> {
     }
 
     // Not sure how to do this....
-    public PersonType[] toArray() {
-        //Object[] personArray = new Object[personList.size()];
-        //return (PersonType[]) personList.toArray(personArray);
-        return null;
+    public Person[] toArray() {
+        Person[] personArray = new Person[personList.size()];
+        return personList.toArray(personArray);
+        //return null;
     }
 
-    public Iterator<PersonType> iterator(){
+    public Iterator<Person> iterator(){
         return personList.iterator();
     }
 
