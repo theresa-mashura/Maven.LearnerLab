@@ -25,6 +25,25 @@ public class TestZipCodeWilmington {
     }
 
     @Test
+    public void testHostLectureENUM() {
+        // Given
+        ZipCodeWilmington zcw = new ZipCodeWilmington();
+        Students s = Students.getInstance();
+        s.clearAllStudyHours();
+        Educator chris = Educator.CHRIS;
+        double expected = 10.0 / 4;
+
+        // When
+        zcw.hostLecture(chris, 10);
+        double actualKelly = s.findById(123).getTotalStudyTime();
+        double actualAbiel = s.findById(124).getTotalStudyTime();
+
+        // Then
+        Assert.assertEquals(expected, actualKelly, .0001);
+        Assert.assertEquals(expected, actualAbiel, .0001);
+    }
+
+    @Test
     public void testHostLectureTeacher() {
         // Given
         ZipCodeWilmington zcw = new ZipCodeWilmington();

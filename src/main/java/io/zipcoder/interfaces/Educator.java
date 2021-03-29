@@ -14,6 +14,10 @@ public enum Educator implements Teacher {
         Instructors.getInstance().add(this.instructor);
     }
 
+    public Instructor getInstructor() {
+        return this.instructor;
+    }
+
     public void teach(Learner learner, double numberOfHours) {
         this.instructor.teach(learner, numberOfHours);
         this.timeWorked += numberOfHours;
@@ -26,5 +30,9 @@ public enum Educator implements Teacher {
 
     public double getTimeWorked() {
         return this.timeWorked;
+    }
+
+    public void clearTimeWorked(){
+        this.timeWorked = 0;
     }
 }
